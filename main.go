@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,4 +21,18 @@ func main() {
 
 	// Start service
 	router.Run()
+}
+
+func render(c *gin.Context, data gin.H, templateName string) {
+	switch c.Request.Header.Get("Accept") {
+	case "application/json":
+		// Answer with JSON
+		c.JSON(http.StatusOK, data["payload"])
+	case "application/xml":
+		// Answer with XML
+		c.XML(http.StatusOK, data["payload"])
+	default:
+		// Answer with HTML
+		c.HTML(http.StatusOK, templateName, data)
+	}
 }

@@ -10,16 +10,10 @@ import (
 func showIndexPage(c *gin.Context) {
 	articles := getAllArticles()
 
-	// Render the template in HTML
-	c.HTML(
-		http.StatusOK,
-		"index.html",
-		// Pass the data (obj interface)
-		gin.H{
-			"title":   "Home Page",
-			"payload": articles,
-		},
-	)
+	// Call the render function
+	render(c, gin.H{
+		"title":   "Home Page",
+		"payload": articles}, "index.html")
 }
 
 func showArticlePage(c *gin.Context) {
