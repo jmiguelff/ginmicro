@@ -1,0 +1,18 @@
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" . }}
+
+  <!--Loop over all articles (passed as payload)-->
+  {{range .payload }}
+    <!--Crate the link for the article based on its ID-->
+    <a href="/article/view/{{.ID}}">
+      <!--Display article name-->
+      <h2>{{.Title}}</h2>
+    </a>
+    <!--Display article content-->
+    <p>{{.Content}}</p>
+  {{end}}
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" . }}
